@@ -68,7 +68,9 @@ def update_env(state, episode, step_counter):
 def rl():
     # 新建一个Q表
     q_table = create_q_table(N_STATES,ACTIONS)
+    # 不停的迭代更新Q表
     for episode in range(EPISODES):
+        # 统计agent需要花多少步才能走到终点
         step_counter = 0
         # 当前智能体所在的地方
         state = 0
@@ -77,8 +79,9 @@ def rl():
         # 环境可视化，将每步的步骤转化成图像输出
         update_env(state,episode,step_counter)
         while not is_terminated:
+            # 从Q表中选择最合适的下一步动作（移动方向）
             action = choose_actions(state,q_table)
-            # 从交互中得到当前位置状态和反馈的奖励
+            # 根据下一步移动的动作来获得下一步的状态和得到的奖励
             S, reward = get_env_feedback(state,action)
             q_predict = q_table.loc[state,action]
             if S != 'terminal':
