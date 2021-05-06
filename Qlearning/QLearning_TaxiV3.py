@@ -91,7 +91,7 @@ decay_rate = 0.01   # Exponential decay rate for exploration prob 探索概率�
 
 # 奖励：完成一次成功载客，可以得到20分，每移动一步扣1分，将乘客送至错误地点扣10分，每撞墙一次扣1分
 for eposide in range(total_episodes):
-    state = env.reset()
+    state = env.reset()    # 重置游戏环境
     step = 0
     done = False
 
@@ -147,3 +147,19 @@ for episode in range(total_test_episodes):
 env.close()
 print(q_table)
 print("Score over time:" + str(sum(rewards)/total_test_episodes))
+
+
+'''
+env.step()函数的详解
+Run one timestep of the environment's dynamics. When end of episode is reached, you are responsible for calling `reset()` to reset this environment's state.
+Accepts an action and returns a tuple (observation, reward, done, info).
+
+Args:
+       action (object): an action provided by the environment
+        
+Returns:
+       observation (object): agent's observation of the current environment
+       reward (float) : amount of reward returned after previous action
+       done (boolean): whether the episode has ended, in which case further step() calls will return undefined results
+       info (dict): contains auxiliary diagnostic information (helpful for debugging, and sometimes learning)
+'''
